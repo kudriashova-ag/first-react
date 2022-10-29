@@ -7,6 +7,7 @@ import filmsData from "./data/films";
 import { useState } from 'react';
 import FilmContext from './contexts/filmContext';
 
+
 function App() {
   const [films, setFilms] = useState(JSON.parse(localStorage.getItem('films')) || filmsData);
 
