@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import MovieCard from "./movie-card";
 import MovieCreateFrom from "./movie-create-from";
@@ -11,16 +11,20 @@ import FilmContext from "../../contexts/filmContext";
 const MovieList = () => {
   const [films, setFilms] = useContext(FilmContext);
 
+  useEffect(() => {
+   localStorage.setItem("films", JSON.stringify(films));
+  }, [films]);
+
   const removeFilm = (id) => {
     const newFilms = films.filter((film) => film.id !== id);
     setFilms(newFilms);
-    localStorage.setItem("films", JSON.stringify(newFilms));
+    //localStorage.setItem("films", JSON.stringify(newFilms));
   };
 
   const addFilm = (film) => {
     const newFilms = [...films, film];
     setFilms(newFilms);
-    localStorage.setItem("films", JSON.stringify(newFilms));
+    //localStorage.setItem("films", JSON.stringify(newFilms));
   };
 
   const updateFilm = (updatedFilmData) => {
@@ -28,7 +32,7 @@ const MovieList = () => {
     const film = newFilms.find((f) => f.id === updatedFilmData.id);
     Object.assign(film, updatedFilmData);
     setFilms(newFilms);
-    localStorage.setItem("films", JSON.stringify(newFilms));
+    //localStorage.setItem("films", JSON.stringify(newFilms));
   };
 
   return (
